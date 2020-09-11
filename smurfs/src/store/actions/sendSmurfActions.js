@@ -10,14 +10,10 @@ const sendSmurfs = (creds) => {
         axios 
             .post('http://localhost:3333/smurfs', creds)
             .then(res => {
-                debugger
-                console.log(res.data);
                 dispatch({ type: ADD_DATA_SUCCESS, payload: res.data})
             })
             .catch(err => {
-                debugger
-                console.log(err)
-                dispatch({ type: ADD_DATA_FAILURE, payload: {message: 'Error'}})
+                dispatch({ type: ADD_DATA_FAILURE, payload: err})
             })
     }
 }

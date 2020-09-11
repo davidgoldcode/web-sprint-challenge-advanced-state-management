@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import AddSmurf from "./AddSmurf";
 import Smurfs from "./Smurfs";
 
-function App({fetchSmurfs, name, age, id, height}) {
+function App({fetchSmurfs}) {
 
     useEffect(() => {
       fetchSmurfs()
@@ -20,13 +20,5 @@ function App({fetchSmurfs, name, age, id, height}) {
     );
   }
 
-  function mapStateToProps(state) {
-    return {
-      name: state.name,
-      age: state.age,
-      height: state.height,
-      id: state.id,
-    }
-  }
 
-export default connect(mapStateToProps, { fetchSmurfs })(App);
+export default connect(null, { fetchSmurfs })(App);

@@ -1,43 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import addSmurfReducer from '../store/reducers/addSmurfReducer';
-import { ADD_DATA } from '../store/actions/sendSmurfActions';
+import sendSmurfs, { ADD_DATA } from '../store/actions/sendSmurfActions'
 
-// const apiCall = (value) = {
-//     axios 
-//     .post('http://localhost:3333/smurfs', creds)
-//     .then(res => {
-//         debugger
-//         console.log(res.data);
-//         dispatch({ type: ADD_DATA_SUCCESS, payload: res.data})
-//     })
-//     .catch(err => {
-//         debugger
-//         console.log(err)
-//         dispatch({ type: ADD_DATA_FAILURE, payload: {message: 'Error'}})
-//     })
-// }
-
+const initialFormValues = {
+    name: '',
+    age: '',
+    height: ''
+}
 
 function AddSmurf(props) {
-    console.log(props, "ADDSMURF");     
     
-    const handler = (event) => {
+    const [formValues, setFormValues] = useState(initialFormValues)
+
+    const changeHandler = (event) => {
         event.preventDefault();
-        console.log(event.target.value);
-        addSmurfReducer(event.target.value);
+        const {name, value} = event.target;
+        setFormValues({ ...formValues, [name]: value})
     }
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log(formValues, "FORM VALUESSSS");
+        console.log(props.sendSmurfs, "FORM VALUESSSS");
+        props.sendSmurfs(formValues);
+    }
 
     return(
         <div>
-            <form onSubmit={handler}>
+            <form onSubmit={onSubmit}>
                 <input
                 type='text'
-                value={}
-                placeholder='name'
+                name='name'
+                value={formValues.name}
+                onChange={changeHandler}
+                placeholder='Type smurf name'
                 />
+
+                <input
+                type='text'
+                name='age'
+                value={formValues.age}
+                onChange={changeHandler}
+                placeholder='Type smurf age'
+                />
+
+                <input
+                type='text'
+                name='weight'
+                value={formValues.weight}
+                onChange={changeHandler}
+                placeholder='Type smurf weight'
+                />
+
+                <button>Submit new Smurf</button>
                 
             </form>
         </div>
@@ -46,8 +62,8 @@ function AddSmurf(props) {
 
 function mapStateToProps(state) {
     return {
-      state
+      state,
     }
   }
 
-  export default connect(mapStateToProps, { addSmurfReducer })(AddSmurf);
+  export default connect(mapStateToProps, { sendSmurfs })(AddSmurf);
