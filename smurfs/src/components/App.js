@@ -1,7 +1,14 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-class App extends Component {
-  render() {
+import fetchSmurfs from '../store/actions/fetchSmurfActions'
+import { connect } from 'react-redux';
+
+function App({fetchSmurfs, name, age, id, height}) {
+
+    useEffect(() => {
+      fetchSmurfs()
+    }, [])
+
     return (
       <div className="App">
         <h1>SMURFS! W/Redux</h1>
@@ -11,6 +18,14 @@ class App extends Component {
       </div>
     );
   }
-}
 
-export default App;
+  function mapStateToProps(state) {
+    return {
+      name: state.name,
+      age: state.age,
+      height: state.height,
+      id: state.id,
+    }
+  }
+
+export default connect(mapStateToProps, { fetchSmurfs })(App);
