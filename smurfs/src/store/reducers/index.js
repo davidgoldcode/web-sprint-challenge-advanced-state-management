@@ -1,21 +1,21 @@
 import { FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS, FETCH_DATA } from "../actions"
 
-export const initialState = [
-    
-]
+export const initialState = {
+    smurf: [{
+            name: '',
+            age: '',
+            height: '',
+            id: '',
+        }],
+}
 
 export const reducer = (state = initialState, action) => {
     console.log("MY STATE", state);
     switch(action.type) {
         case FETCH_DATA:
-            return [...state]
+            return []
         case FETCH_DATA_SUCCESS:
-            return [...state, {
-                name: action.payload.name,
-                age: action.payload.age,
-                height: action.payload.height,
-                id: action.payload.id,
-            }]
+            return {smurf: [...state, { ...action.payload }]}
         case FETCH_DATA_FAILURE: 
             return [...state, {errorMessage: action.payload.message}]
         default:

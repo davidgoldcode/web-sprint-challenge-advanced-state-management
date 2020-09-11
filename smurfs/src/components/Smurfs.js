@@ -5,13 +5,13 @@ function Smurfs(props) {
 
     return(
         <>
-        {props.state.map((item) => (
+        {/* {props.smurf.map((item) => (
             <>
             <h1>{item.name}</h1>
             <h3>{item.age}</h3>
             <h3>{item.height}</h3>
             </>
-        ))}
+        ))} */}
         </>
     )
 }
