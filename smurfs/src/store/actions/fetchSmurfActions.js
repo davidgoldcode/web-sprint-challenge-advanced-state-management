@@ -11,7 +11,7 @@ const fetchSmurfs = () => {
             .get('http://localhost:3333/smurfs')
             .then(res => {
                 debugger
-                console.log(res);
+                console.log(res.data);
                 dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data[0]})
             })
             .catch(err => {

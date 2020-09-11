@@ -3,6 +3,7 @@ import "./App.css";
 import fetchSmurfs from '../store/actions/fetchSmurfActions'
 import { connect } from 'react-redux';
 import AddSmurf from "./AddSmurf";
+import Smurfs from "./Smurfs";
 
 function App({fetchSmurfs, name, age, id, height}) {
 
@@ -14,6 +15,7 @@ function App({fetchSmurfs, name, age, id, height}) {
       <div className="App">
         <h1>SMURFS! with Redux</h1>
         <AddSmurf/>
+        <Smurfs/>
       </div>
     );
   }

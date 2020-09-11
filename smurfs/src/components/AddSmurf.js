@@ -4,6 +4,7 @@ import axios from 'axios';
 import addSmurfReducer from '../store/reducers/addSmurfReducer';
 
 function AddSmurf({name}) {
+    
     const handler = (event) => {
         event.preventDefault();
         console.log(event.target.value);
@@ -25,13 +26,13 @@ function AddSmurf({name}) {
     )
 }
 
-function mapStateToProps(state) {
-    return {
-      name: state.name,
-      age: state.age,
-      height: state.height,
-      id: state.id,
-    }
-  }
+// function mapStateToProps(state) {
+//     return {
+//       name: state.name,
+//       age: state.age,
+//       height: state.height,
+//       id: state.id,
+//     }
+//   }
 
-  export default connect(mapStateToProps, { addSmurfReducer })(AddSmurf);
+  export default connect(null, { addSmurfReducer })(AddSmurf);
