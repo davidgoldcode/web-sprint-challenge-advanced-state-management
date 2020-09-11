@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import sendSmurfs, { ADD_DATA } from '../store/actions/sendSmurfActions'
+import { initialState } from '../store/reducers';
 
 const initialFormValues = {
     name: '',
@@ -19,11 +20,20 @@ function AddSmurf(props) {
         setFormValues({ ...formValues, [name]: value})
     }
 
-    const onSubmit = (event) => {
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(formValues, "FORM VALUESSSS");
+    //     console.log(props.sendSmurfs, "FORM VALUESSSS");
+    //     props.sendSmurfs(formValues);
+    // }
+
+        const onSubmit = (event) => {
         event.preventDefault();
-        console.log(formValues, "FORM VALUESSSS");
-        console.log(props.sendSmurfs, "FORM VALUESSSS");
-        props.sendSmurfs(formValues);
+        console.log("FORMVALUES", formValues);
+        axios 
+            .post('http://localhost:3333/smurfs', formValues)
+            .then(res => setFormValues(initialFormValues))
+            .catch(err => { console.log('error')})
     }
 
     return(
@@ -47,10 +57,10 @@ function AddSmurf(props) {
 
                 <input
                 type='text'
-                name='weight'
-                value={formValues.weight}
+                name='height'
+                value={formValues.height}
                 onChange={changeHandler}
-                placeholder='Type smurf weight'
+                placeholder='Type smurf height'
                 />
 
                 <button>Submit new Smurf</button>
@@ -60,10 +70,4 @@ function AddSmurf(props) {
     )
 }
 
-function mapStateToProps(state) {
-    return {
-      state,
-    }
-  }
-
-  export default connect(mapStateToProps, { sendSmurfs })(AddSmurf);
+  export default AddSmurf;

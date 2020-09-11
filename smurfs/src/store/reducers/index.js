@@ -19,7 +19,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                smurf: action.payload,
+                smurf: [...action.payload],
             }
         case FETCH_DATA_FAILURE: 
             return {
@@ -34,12 +34,13 @@ export const reducer = (state = initialState, action) => {
         case ADD_DATA_SUCCESS:
             return {
                 ...state,
-                smurf: [action.payload],
                 isFetching: false,
+                smurf: [...action.payload],
             }
         case ADD_DATA_FAILURE: 
             return {
-                errorMessage: action.payload.message,
+                ...state,
+                error: action.payload,
             }
         default:
             return state;            
